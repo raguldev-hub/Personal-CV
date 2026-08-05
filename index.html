@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ragul — Full-Stack Developer, AI/GenAI</title>
+<meta name="description" content="Ragul — Full-Stack Developer building Java/Spring Boot/React applications with real LLM and computer-vision integration.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0F1319;
+    --bg-panel: #161C25;
+    --bg-panel-2: #1C2430;
+    --line: #29323F;
+    --line-soft: #202832;
+    --text: #E8ECF1;
+    --text-dim: #8B95A5;
+    --text-dimmer: #5D6675;
+    --accent: #E8A33D;
+    --accent-soft: rgba(232,163,61,0.12);
+    --accent-2: #5FD3C4;
+    --accent-2-soft: rgba(95,211,196,0.12);
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --radius: 10px;
+    --maxw: 1100px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(232,163,61,0.06), transparent 60%),
+      radial-gradient(900px 500px at 100% 10%, rgba(95,211,196,0.05), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection{ background: var(--accent-soft); color: var(--accent); }
+
+  a{ color: inherit; }
+  h1,h2,h3{ font-family: var(--display); margin: 0; letter-spacing: -0.01em; }
+  p{ margin: 0; }
+  section{ padding: 96px 0; }
+  .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position: sticky; top:0; z-index: 50;
+    backdrop-filter: blur(10px);
+    background: rgba(15,19,25,0.72);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  nav{
+    max-width: var(--maxw); margin:0 auto; padding: 18px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{
+    font-family: var(--mono); font-weight:600; font-size:15px;
+    color: var(--text); text-decoration:none;
+    display:flex; align-items:center; gap: 8px;
+  }
+  .logo span{ color: var(--accent); }
+  .navlinks{ display:flex; gap: 28px; list-style:none; margin:0; padding:0; flex-wrap:wrap; }
+  .navlinks a{
+    text-decoration:none; color: var(--text-dim); font-size: 14.5px;
+    transition: color .2s ease;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{ color: var(--text); }
+  .navlinks a:focus-visible{ outline: 2px solid var(--accent); outline-offset:4px; border-radius: 3px; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 120px 0 100px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .hero-grid{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: radial-gradient(circle at 20% 20%, black, transparent 70%);
+    opacity: .5;
+    pointer-events: none;
+  }
+  .hero-inner{ position:relative; max-width: 760px; }
+  .hero h1{
+    font-size: clamp(42px, 7vw, 74px);
+    font-weight: 700;
+    line-height: 1.02;
+  }
+  .hero .role{
+    font-family: var(--mono);
+    color: var(--accent-2);
+    font-size: clamp(16px, 2.4vw, 20px);
+    margin-top: 14px;
+    font-weight: 500;
+  }
+  .hero p.lede{
+    margin-top: 26px;
+    font-size: 18px;
+    color: var(--text-dim);
+    max-width: 560px;
+  }
+  .cta-row{ display:flex; gap: 14px; margin-top: 38px; flex-wrap: wrap; }
+  .btn{
+    font-family: var(--mono);
+    font-size: 14px;
+    padding: 13px 22px;
+    border-radius: 8px;
+    text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px;
+    transition: transform .15s ease, border-color .15s ease, background .15s ease;
+    border: 1px solid var(--line);
+  }
+  .btn-primary{ background: var(--accent); color: #14100A; border-color: var(--accent); font-weight:600; }
+  .btn-primary:hover{ transform: translateY(-2px); }
+  .btn-ghost{ color: var(--text); background: transparent; }
+  .btn-ghost:hover{ border-color: var(--text-dim); transform: translateY(-2px); }
+  .btn:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .hero-facts{
+    margin-top: 56px;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow:hidden;
+    max-width: 620px;
+  }
+  .hero-facts div{
+    padding: 16px 18px;
+    border-right: 1px solid var(--line);
+  }
+  .hero-facts div:last-child{ border-right:none; }
+  .hero-facts .k{ font-family: var(--mono); font-size:11px; color: var(--text-dimmer); text-transform:uppercase; letter-spacing:.08em; }
+  .hero-facts .v{ font-size: 14.5px; margin-top:6px; color: var(--text); font-weight:500; }
+
+  /* ---------- SECTION HEADS ---------- */
+  .section-head{ max-width: 640px; margin-bottom: 52px; }
+  .section-head h2{ font-size: clamp(28px, 4vw, 38px); }
+  .section-head p{ color: var(--text-dim); margin-top: 14px; font-size: 16.5px; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items:start; }
+  .about-grid p{ color: var(--text-dim); font-size: 16.5px; }
+  .about-grid p + p{ margin-top: 16px; }
+  .spec-sheet{
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--bg-panel);
+    overflow:hidden;
+  }
+  .spec-sheet .row{
+    display:flex; justify-content:space-between; gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 14px;
+  }
+  .spec-sheet .row:last-child{ border-bottom:none; }
+  .spec-sheet .row .k{ color: var(--text-dimmer); font-family: var(--mono); font-size: 12.5px; }
+  .spec-sheet .row .v{ color: var(--text); text-align:right; }
+
+  /* ---------- PROJECTS / PIPELINE ---------- */
+  .project{
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--bg-panel), var(--bg-panel-2));
+    padding: 36px;
+    margin-bottom: 28px;
+    opacity: 0; transform: translateY(18px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .project.in-view{ opacity:1; transform:none; }
+  .project-top{ display:flex; justify-content:space-between; align-items:flex-start; gap: 20px; flex-wrap: wrap; }
+  .project h3{ font-size: 24px; }
+  .tag{
+    font-family: var(--mono); font-size: 11.5px; letter-spacing:.06em;
+    text-transform: uppercase; color: var(--accent-2);
+    background: var(--accent-2-soft);
+    border: 1px solid rgba(95,211,196,0.28);
+    padding: 5px 10px; border-radius: 6px;
+    white-space: nowrap;
+  }
+  .project .lede{ color: var(--text-dim); margin-top: 12px; font-size: 15.5px; max-width: 680px; }
+
+  /* pipeline diagram */
+  .pipeline{
+    display:flex; align-items:center; flex-wrap:wrap;
+    gap: 0;
+    margin: 28px 0 24px;
+    padding: 18px;
+    background: var(--bg);
+    border: 1px solid var(--line-soft);
+    border-radius: 10px;
+  }
+  .pipeline .node{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text);
+    background: var(--bg-panel-2);
+    border: 1px solid var(--line);
+    padding: 9px 13px;
+    border-radius: 7px;
+    white-space: nowrap;
+  }
+  .pipeline .arrow{
+    width: 34px; height: 2px;
+    margin: 0 6px;
+    position: relative;
+    background: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 11px);
+    background-size: 200% 100%;
+    animation: flow 1.6s linear infinite;
+    flex: 0 0 auto;
+  }
+  .pipeline .arrow::after{
+    content:"";
+    position:absolute; right:-1px; top:50%; transform: translateY(-50%);
+    border: 4px solid transparent;
+    border-left-color: var(--accent);
+  }
+  @keyframes flow{ from{ background-position: 0 0; } to{ background-position: -34px 0; } }
+
+  .project ul{ margin: 0; padding-left: 20px; color: var(--text-dim); font-size: 15px; }
+  .project ul li{ margin-bottom: 9px; }
+  .project ul li::marker{ color: var(--accent); }
+
+  .chips{ display:flex; flex-wrap:wrap; gap: 8px; margin-top: 22px; }
+  .chip{
+    font-family: var(--mono); font-size: 12px;
+    color: var(--text-dim);
+    border: 1px solid var(--line);
+    padding: 6px 11px; border-radius: 6px;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skill-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .skill-card{
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px;
+    background: var(--bg-panel);
+  }
+  .skill-card h4{
+    font-family: var(--mono); font-size: 12.5px; text-transform:uppercase;
+    letter-spacing: .08em; color: var(--accent); margin: 0 0 14px;
+  }
+  .skill-card .chips{ margin-top:0; }
+  .skill-card.highlight{ border-color: rgba(232,163,61,0.4); background: linear-gradient(180deg, var(--bg-panel), rgba(232,163,61,0.05)); }
+  .skill-card.highlight h4{ color: var(--accent); }
+
+  /* ---------- EXPERIENCE / EDUCATION ---------- */
+  .two-col{ display:grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .card{
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 26px;
+    background: var(--bg-panel);
+  }
+  .card h4{ font-family: var(--display); font-size: 18px; margin-bottom: 4px; }
+  .card .role-line{ color: var(--text-dimmer); font-family: var(--mono); font-size: 12.5px; margin-bottom: 14px; }
+  .card ul{ padding-left: 18px; color: var(--text-dim); font-size: 14.5px; margin:0; }
+  .card ul li{ margin-bottom: 8px; }
+  .card ul li::marker{ color: var(--accent-2); }
+  .card .meta{ display:flex; justify-content:space-between; font-size: 13.5px; color: var(--text-dim); margin-bottom: 4px; }
+
+  .cert-list{ list-style:none; margin: 18px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .cert-list li{
+    font-size: 14.5px; color: var(--text-dim);
+    padding-left: 18px; position:relative;
+  }
+  .cert-list li::before{
+    content:"›"; position:absolute; left:0; color: var(--accent); font-family: var(--mono);
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-panel{
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 56px;
+    background: linear-gradient(135deg, var(--bg-panel), var(--bg-panel-2));
+    text-align:center;
+  }
+  .contact-panel h2{ font-size: clamp(28px, 4vw, 40px); }
+  .contact-panel p{ color: var(--text-dim); margin-top: 14px; max-width: 480px; margin-left:auto; margin-right:auto; }
+  .contact-links{ display:flex; justify-content:center; gap: 16px; margin-top: 34px; flex-wrap: wrap; }
+
+  footer{
+    padding: 36px 28px;
+    text-align:center;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-dimmer);
+    border-top: 1px solid var(--line-soft);
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{ opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in-view{ opacity:1; transform:none; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+    html{ scroll-behavior: auto; }
+  }
+
+  @media (max-width: 860px){
+    .about-grid, .two-col{ grid-template-columns: 1fr; }
+    .skill-grid{ grid-template-columns: repeat(2, 1fr); }
+    .hero-facts{ grid-template-columns: 1fr; }
+    .hero-facts div{ border-right:none; border-bottom: 1px solid var(--line); }
+    .hero-facts div:last-child{ border-bottom:none; }
+    section{ padding: 64px 0; }
+    .contact-panel{ padding: 36px 22px; }
+  }
+  @media (max-width: 600px){
+    .skill-grid{ grid-template-columns: 1fr; }
+    .project{ padding: 24px; }
+    nav{ flex-direction:column; align-items:flex-start; gap: 10px; }
+  }
+</style>
+<noscript><style>.reveal, .project{ opacity:1 !important; transform:none !important; }</style></noscript>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a class="logo" href="#top">&lt;<span>RAGUL</span>&gt;</a>
+    <ul class="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="wrap hero-inner">
+      <div class="eyebrow">Open to Software Engineer roles</div>
+      <h1>Ragul</h1>
+      <div class="role">Full-Stack Developer — Java · React · AI/GenAI</div>
+      <p class="lede">I build full-stack systems that put real AI models to work — not just as a coding aid, but as the product itself. Computer vision, LLM reasoning, fintech-style account systems.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#work">View Projects →</a>
+        <a class="btn btn-ghost" href="mailto:ragulkathir.dev@gmail.com">Get in Touch</a>
+      </div>
+      <div class="hero-facts">
+        <div><div class="k">Location</div><div class="v">Salem, India</div></div>
+        <div><div class="k">Education</div><div class="v">B.E. CSE — 2027</div></div>
+        <div><div class="k">Focus</div><div class="v">Full-Stack + GenAI</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="reveal">
+          <div class="eyebrow">About</div>
+          <h2 style="font-size:32px; margin-bottom:20px;">Building products, not just demos.</h2>
+          <p>I'm a Computer Science Engineering student building full-stack applications with Java, Spring Boot, and React — and increasingly, putting large language models to work inside real products rather than just using them to write code.</p>
+          <p>My projects span computer vision (real-time face recognition), applied GenAI (LLM-driven fact verification), and full-stack systems that replace real paper-based workflows with software. I care about understanding every layer of what I ship — from the model to the database to the UI.</p>
+        </div>
+        <div class="reveal spec-sheet">
+          <div class="row"><span class="k">NAME</span><span class="v">Ragul</span></div>
+          <div class="row"><span class="k">ROLE</span><span class="v">Full-Stack Developer, AI/GenAI</span></div>
+          <div class="row"><span class="k">DEGREE</span><span class="v">B.E. Computer Science Engineering</span></div>
+          <div class="row"><span class="k">INSTITUTION</span><span class="v">GCE, Salem-11</span></div>
+          <div class="row"><span class="k">CGPA</span><span class="v">7.65 / 10</span></div>
+          <div class="row"><span class="k">GRAD YEAR</span><span class="v">2027 (Expected)</span></div>
+          <div class="row"><span class="k">BASED IN</span><span class="v">Salem, Tamil Nadu, India</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Selected Work</div>
+        <h2>Three systems, three real problems.</h2>
+        <p>Each one is built end-to-end — I can walk through every box in these diagrams.</p>
+      </div>
+
+      <!-- FactGuard -->
+      <div class="project reveal">
+        <div class="project-top">
+          <h3>FactGuard</h3>
+          <span class="tag">AI / LLM · FastAPI</span>
+        </div>
+        <p class="lede">A fact-checking pipeline that uses prompt-engineered Gemini reasoning, live news evidence, and OCR to verify claims submitted as text, images, or URLs.</p>
+
+        <div class="pipeline">
+          <span class="node">Text / Image / URL</span><span class="arrow"></span>
+          <span class="node">OCR + trafilatura</span><span class="arrow"></span>
+          <span class="node">Gemini LLM (2-stage)</span><span class="arrow"></span>
+          <span class="node">NewsAPI · GNews · CricketAPI</span><span class="arrow"></span>
+          <span class="node">Verdict + Confidence</span>
+        </div>
+
+        <ul>
+          <li>Applied prompt engineering with Google Gemini (LLM) to build a two-stage AI reasoning pipeline: understanding the claim, then generating a verdict from gathered evidence.</li>
+          <li>Integrated NewsAPI, GNews, and CricketAPI for live news and real-time sports-score evidence.</li>
+          <li>Built a multi-engine OCR pipeline (EasyOCR, Tesseract, PaddleOCR) and used trafilatura to extract article text from URLs.</li>
+          <li>Cross-referenced verdicts against trusted news domains to compute confidence scores; built a tabbed Text/Image/URL frontend.</li>
+        </ul>
+
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Gemini (LLM)</span>
+          <span class="chip">Prompt Engineering</span><span class="chip">NewsAPI</span><span class="chip">GNews</span>
+          <span class="chip">CricketAPI</span><span class="chip">EasyOCR</span><span class="chip">Tesseract</span>
+          <span class="chip">PaddleOCR</span><span class="chip">trafilatura</span><span class="chip">HTML/CSS/JS</span>
+        </div>
+      </div>
+
+      <!-- VisionAttend -->
+      <div class="project reveal">
+        <div class="project-top">
+          <h3>VisionAttend</h3>
+          <span class="tag">Computer Vision · Full-Stack</span>
+        </div>
+        <p class="lede">A three-tier attendance system that recognizes enrolled students in real time, replacing a legacy Haar Cascade + LBPH pipeline with modern deep-learning models.</p>
+
+        <div class="pipeline">
+          <span class="node">Webcam Frame</span><span class="arrow"></span>
+          <span class="node">YuNet (Detect)</span><span class="arrow"></span>
+          <span class="node">SFace (Embed)</span><span class="arrow"></span>
+          <span class="node">Cosine Match</span><span class="arrow"></span>
+          <span class="node">Spring Boot + MySQL</span><span class="arrow"></span>
+          <span class="node">React Dashboard</span>
+        </div>
+
+        <ul>
+          <li>Built a three-tier attendance system: a Python computer-vision pipeline, a Spring Boot REST backend, and a React dashboard.</li>
+          <li>Used OpenCV's YuNet (detection) and SFace (recognition) models, replacing a legacy Haar Cascade + LBPH approach for higher accuracy.</li>
+          <li>Matched live webcam faces to enrolled students in real time using cosine-similarity on face embeddings.</li>
+          <li>Designed idempotent REST APIs (Spring Boot, JPA, MySQL) and a React (Vite) dashboard with on-demand refresh.</li>
+        </ul>
+
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">OpenCV (YuNet, SFace)</span><span class="chip">Spring Boot</span>
+          <span class="chip">Java</span><span class="chip">MySQL</span><span class="chip">JPA</span><span class="chip">React</span>
+        </div>
+      </div>
+
+      <!-- College Stationery Shop -->
+      <div class="project reveal">
+        <div class="project-top">
+          <h3>College Stationery Shop</h3>
+          <span class="tag">Full-Stack · Digital Accounts</span>
+        </div>
+        <p class="lede">A full-stack replacement for a campus shop's paper account book — tracking each fresher's deposit, purchases, and top-ups digitally instead of by hand.</p>
+
+        <div class="pipeline">
+          <span class="node">React + Axios (Student / Staff)</span><span class="arrow"></span>
+          <span class="node">Controller → Service → Repository</span><span class="arrow"></span>
+          <span class="node">JPA</span><span class="arrow"></span>
+          <span class="node">MySQL / PostgreSQL</span>
+        </div>
+
+        <ul>
+          <li>Built a full-stack replacement for a campus shop's paper account book, tracking each fresher's ₹5000 deposit along with every purchase and top-up.</li>
+          <li>Designed a layered Spring Boot backend (Controller → Service → Repository → Entity) with JPA entities and REST APIs.</li>
+          <li>Built a React + Axios frontend with separate Student and Staff/POS portals, including live student search and autocomplete at the counter.</li>
+          <li>Implemented a reporting endpoint that aggregates shop-wide sales versus top-up totals for staff.</li>
+        </ul>
+
+        <div class="chips">
+          <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">Spring Data JPA</span>
+          <span class="chip">H2</span><span class="chip">PostgreSQL/MySQL</span><span class="chip">React</span><span class="chip">Axios</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Skills</div>
+        <h2>The stack, end to end.</h2>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card highlight reveal">
+          <h4>AI / GenAI</h4>
+          <div class="chips">
+            <span class="chip">LLM Integration</span><span class="chip">Prompt Engineering</span><span class="chip">Google Gemini API</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h4>Frontend</h4>
+          <div class="chips">
+            <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">React</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h4>Backend</h4>
+          <div class="chips">
+            <span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">REST APIs</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h4>Database</h4>
+          <div class="chips">
+            <span class="chip">MySQL</span><span class="chip">JPA</span><span class="chip">H2</span><span class="chip">PostgreSQL</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h4>Tools</h4>
+          <div class="chips">
+            <span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">VS Code</span><span class="chip">IntelliJ</span><span class="chip">OpenCV</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h4>Fundamentals</h4>
+          <div class="chips">
+            <span class="chip">DSA</span><span class="chip">OOP</span><span class="chip">DBMS</span><span class="chip">OS</span><span class="chip">CN</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE + EDUCATION -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Experience &amp; Education</div>
+        <h2>Where I've worked and studied.</h2>
+      </div>
+      <div class="two-col">
+        <div class="card reveal">
+          <div class="meta"><span>Full Stack Development Intern</span><span>2025</span></div>
+          <h4>Odugaa Tech Pvt. Ltd.</h4>
+          <div class="role-line">FULL-STACK · REST APIs · MYSQL</div>
+          <ul>
+            <li>Built RESTful APIs and implemented both frontend and backend functionality, integrating MySQL for data management.</li>
+            <li>Practiced full-stack development, Git-based version control, and web application deployment in a live team environment.</li>
+          </ul>
+        </div>
+        <div class="card reveal">
+          <div class="meta"><span>B.E. Computer Science Engineering</span><span>Exp. 2027</span></div>
+          <h4>Government College of Engineering, Salem-11</h4>
+          <div class="role-line">CGPA 7.65 / 10</div>
+          <ul>
+            <li>Transferred from Government College of Engineering, Tirunelveli (08/2023 – 10/2024), CGPA: 7.90 / 10.</li>
+          </ul>
+          <ul class="cert-list" style="margin-top:18px;">
+            <li>Smart India Hackathon (SIH) – Participant (2025)</li>
+            <li>CM Trophy &amp; Zonal Level Cricket Certification – TN Govt. (2025)</li>
+            <li>Active Member — Rotaract Club, GECO Tech Club, Sports Club</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-panel reveal">
+        <div class="eyebrow" style="justify-content:center;">Get in touch</div>
+        <h2>Let's build something real.</h2>
+        <p>Open to Software Engineer roles — full-stack, AI/GenAI, or both. I'll happily walk you through any project on this page in detail.</p>
+        <div class="contact-links">
+          <a class="btn btn-primary" href="mailto:ragulkathir.dev@gmail.com">Email Me</a>
+          <a class="btn btn-ghost" href="tel:+918637632230">+91 86376 32230</a>
+          <a class="btn btn-ghost" href="https://linkedin.com/in/ragul-k-0157b2376" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Salem, India — built by Ragul
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .project').forEach(el => io.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target){
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Safety net: guarantee all content is visible even if IntersectionObserver
+  // never fires (e.g. reduced motion, odd viewport/print contexts).
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.reveal, .project').forEach(el => el.classList.add('in-view'));
+    }, 1200);
+  });
+</script>
+
+</body>
+</html>
