@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ragul K – Software Engineer Portfolio</title>
+<meta name="description" content="Portfolio of Ragul K, a computer science student building full-stack and AI-based projects with Java, Spring Boot, Python and React.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f3f6fb; --surface:#ffffff; --ink:#10223b; --muted:#53627a;
+  --line:#d5deec; --blue:#2754e6; --blue-soft:#e4eaff; --mark:#ffd84d;
+  --grid:rgba(16,34,59,.05);
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --text:"Figtree","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0e1726; --surface:#16233a; --ink:#eaf0fb; --muted:#9fb0cc;
+    --line:#27375a; --blue:#7d9bff; --blue-soft:#1d2f5c; --mark:#ffd84d;
+    --grid:rgba(234,240,251,.05);
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{
+  font-family:var(--text);font-size:1.0625rem;line-height:1.65;color:var(--ink);
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:32px 32px;
+}
+a{color:var(--blue);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1040px,100% - 2.5rem);margin-inline:auto}
+h1,h2,h3{font-family:var(--display);line-height:1.1;letter-spacing:-.02em}
+
+/* Header */
+header.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:60px}
+.logo{font-family:var(--display);font-weight:800;font-size:1.2rem;color:var(--ink);text-decoration:none}
+nav{display:flex;gap:1.25rem;overflow-x:auto;scrollbar-width:none}
+nav a{color:var(--muted);text-decoration:none;font-weight:500;font-size:.95rem;white-space:nowrap}
+nav a:hover{color:var(--blue)}
+
+/* Hero */
+.hero{padding:clamp(3.5rem,9vw,7rem) 0 clamp(3rem,7vw,5rem)}
+.detect{position:relative;display:inline-block;padding:1.1rem 1.6rem 1.3rem;margin-bottom:.5rem}
+.detect h1{font-weight:800;font-size:clamp(3.4rem,12vw,7.5rem);letter-spacing:-.04em}
+.detect i{position:absolute;width:26px;height:26px;border:4px solid var(--blue)}
+.detect i:nth-child(1){top:0;left:0;border-right:0;border-bottom:0}
+.detect i:nth-child(2){top:0;right:0;border-left:0;border-bottom:0}
+.detect i:nth-child(3){bottom:0;left:0;border-right:0;border-top:0}
+.detect i:nth-child(4){bottom:0;right:0;border-left:0;border-top:0}
+.detect small{position:absolute;left:-4px;bottom:-1.75rem;background:var(--blue);color:#fff;font:600 .8rem/1 var(--text);padding:.4rem .6rem;border-radius:3px}
+.hero .role{font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,3vw,1.8rem);margin-top:1.25rem}
+.hero p.lead{max-width:60ch;color:var(--muted);margin-top:.75rem}
+.cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.75rem}
+.btn{display:inline-block;padding:.75rem 1.3rem;border-radius:8px;font-weight:600;text-decoration:none;border:2px solid var(--ink);color:var(--ink);transition:transform .15s,background .15s}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn:hover{transform:translateY(-2px)}
+@media (prefers-reduced-motion:no-preference){
+  .detect i{animation:snap .7s cubic-bezier(.2,.8,.2,1) both}
+  .detect small{animation:tag .4s .6s both}
+  @keyframes snap{from{transform:scale(2.4);opacity:0}to{transform:none;opacity:1}}
+  @keyframes tag{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+}
+
+/* Sections */
+section{padding:clamp(2.5rem,6vw,4.5rem) 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:1.75rem;display:inline-block;background:linear-gradient(transparent 62%,var(--mark) 62% 92%,transparent 92%)}
+@media (prefers-color-scheme:dark){section h2{background:none;border-bottom:5px solid var(--mark)}}
+.about p{max-width:68ch;font-size:1.15rem}
+
+/* Skills */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}
+.skill{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.2rem}
+.skill h3{font-size:1.05rem;margin-bottom:.7rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;list-style:none}
+.chips li{background:var(--blue-soft);color:var(--blue);font-size:.88rem;font-weight:600;padding:.2rem .65rem;border-radius:999px}
+
+/* Projects */
+.projects{display:grid;gap:1.25rem}
+.project{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--blue);border-radius:4px 14px 14px 4px;padding:1.6rem 1.7rem}
+.project:nth-child(2){border-left-color:var(--mark)}
+.project:nth-child(3){border-left-color:var(--ink)}
+.project h3{font-size:1.5rem}
+.project .tag{color:var(--muted);font-weight:500;margin:.2rem 0 .9rem}
+.project ul{padding-left:1.15rem;max-width:75ch}
+.project li{margin-bottom:.45rem}
+.project .chips{margin-top:1rem}
+.project .chips li{background:transparent;border:1px solid var(--line);color:var(--muted);font-weight:500}
+
+/* Pipelines */
+.flow-title{font-family:var(--display);font-weight:700;font-size:1rem;margin:1.4rem 0 .6rem}
+.flow-title span{color:var(--muted);font-family:var(--text);font-weight:500;font-size:.9rem}
+.flow{list-style:none;counter-reset:step;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:1.5rem;margin-bottom:.4rem;padding-left:0}
+.flow li{position:relative;counter-increment:step;background:var(--blue-soft);border:1px solid var(--line);border-radius:10px;padding:.65rem .7rem .7rem;font-size:.83rem;line-height:1.35;color:var(--muted);margin-bottom:0}
+.flow li::before{content:counter(step);display:inline-grid;place-items:center;width:1.35rem;height:1.35rem;border-radius:50%;background:var(--blue);color:#fff;font:700 .72rem/1 var(--text);margin-bottom:.4rem}
+.flow li b{display:block;color:var(--ink);font-family:var(--display);font-size:.95rem;line-height:1.2;margin-bottom:.15rem}
+.flow li:not(:last-child)::after{content:"\2192";position:absolute;right:-1.3rem;top:50%;transform:translateY(-50%);width:1.1rem;text-align:center;color:var(--blue);font-weight:700;font-size:1.1rem}
+.flow li.out{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.flow li.out b{color:var(--paper)}
+@media (max-width:860px){
+  .flow{grid-template-columns:1fr;gap:1.3rem}
+  .flow li:not(:last-child)::after{content:"\2193";right:auto;left:1.5rem;top:auto;bottom:-1.35rem;transform:none}
+}
+
+/* Timeline */
+.timeline{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.timeline h3.col{font-size:1.25rem;margin-bottom:1rem}
+.step{position:relative;padding-left:1.6rem;border-left:3px solid var(--line);margin-bottom:1.4rem}
+.step::before{content:"";position:absolute;left:-9px;top:.35rem;width:15px;height:15px;border-radius:50%;background:var(--blue);border:3px solid var(--paper)}
+.step b{display:block;font-family:var(--display);font-size:1.1rem}
+.step span{color:var(--muted);display:block;font-size:.95rem}
+.step ul{padding-left:1.1rem;margin-top:.5rem}
+
+/* Achievements */
+.ach{list-style:none;display:grid;gap:.75rem;max-width:640px}
+.ach li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.9rem 1.1rem;font-weight:500}
+
+/* Contact */
+.contact p{max-width:55ch;color:var(--muted);margin-bottom:1.5rem}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.9rem}
+.links a{display:block;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem;text-decoration:none;color:var(--ink);font-weight:600;transition:border-color .15s,transform .15s}
+.links a small{display:block;color:var(--muted);font-weight:500;font-size:.85rem;overflow-wrap:anywhere}
+.links a:hover{border-color:var(--blue);transform:translateY(-2px)}
+footer{padding:2rem 0 2.5rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+
+@media (max-width:560px){
+  .project{padding:1.3rem 1.2rem}
+  .detect{padding:.8rem 1rem 1.1rem}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#home">Ragul K</a>
+    <nav aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#journey">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+  <div class="wrap hero">
+    <div class="detect">
+      <i></i><i></i><i></i><i></i>
+      <h1>Ragul K</h1>
+    </div>
+    <p class="role">Aspiring Software Engineer</p>
+    <p class="lead">Computer Science student from Salem, India. I build full-stack web apps and AI-powered tools with Java, Spring Boot, Python and React.</p>
+    <div class="cta">
+      <a class="btn solid" href="#projects">See my projects</a>
+      <a class="btn" href="ragul-resume-updated.pdf" download>Download resume</a>
+      <a class="btn" href="#contact">Get in touch</a>
+    </div>
+  </div>
+
+  <section id="about" class="about">
+    <div class="wrap">
+      <h2>About me</h2>
+      <p>I'm a Computer Science Engineering student at Government College of Engineering, Salem, graduating in May 2027. During my internship I built REST APIs, and since then I've delivered projects that range from a face recognition attendance system to an AI fake news detector and a campus placement portal. I'm looking for a Software Engineer role where I can keep learning and contribute to real-world projects.</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <div class="skills">
+        <div class="skill"><h3>Frontend</h3><ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>React</li></ul></div>
+        <div class="skill"><h3>Backend</h3><ul class="chips"><li>Java</li><li>Spring Boot</li><li>Python</li><li>FastAPI</li><li>REST APIs</li></ul></div>
+        <div class="skill"><h3>Database</h3><ul class="chips"><li>MySQL</li><li>JPA</li><li>H2</li><li>PostgreSQL</li></ul></div>
+        <div class="skill"><h3>Tools</h3><ul class="chips"><li>Git</li><li>GitHub</li><li>VS Code</li><li>IntelliJ</li><li>OpenCV</li></ul></div>
+        <div class="skill"><h3>Fundamentals</h3><ul class="chips"><li>DSA</li><li>OOP</li><li>DBMS</li><li>OS</li><li>CN</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <h2>Projects</h2>
+      <div class="projects">
+
+        <article class="project">
+          <h3>VisionAttend</h3>
+          <p class="tag">AI-powered face recognition attendance system</p>
+          <ul>
+            <li>Built a three-tier system: a Python computer-vision pipeline, a Spring Boot REST backend and a React (Vite) dashboard.</li>
+            <li>Used OpenCV's YuNet and SFace models with cosine similarity to identify people from a live webcam feed, replacing a Haar Cascade + LBPH approach for higher accuracy.</li>
+            <li>Designed REST APIs with Spring Boot, JPA and MySQL that mark attendance idempotently and serve attendance lists.</li>
+          </ul>
+          <h4 class="flow-title">Working flow <span>· from webcam to dashboard</span></h4>
+          <ol class="flow" style="--n:6">
+            <li><b>Webcam feed</b>Live video frames are read by the Python pipeline.</li>
+            <li><b>Face detection</b>OpenCV YuNet finds each face in the frame.</li>
+            <li><b>Face encoding</b>SFace turns the face into an embedding vector.</li>
+            <li><b>Matching</b>Cosine similarity compares it with enrolled students.</li>
+            <li><b>Spring Boot API</b>A REST call marks attendance, once per person (idempotent).</li>
+            <li class="out"><b>MySQL + React</b>JPA stores the record; the dashboard shows attendance lists.</li>
+          </ol>
+          <ul class="chips"><li>Python</li><li>OpenCV</li><li>Spring Boot</li><li>Java</li><li>MySQL</li><li>JPA</li><li>React</li></ul>
+        </article>
+
+        <article class="project">
+          <h3>FactGuard</h3>
+          <p class="tag">AI-powered fake news detection system</p>
+          <ul>
+            <li>Built a FastAPI backend with a two-stage Gemini AI pipeline (claim understanding, then an evidence-based verdict) that pulls live evidence from NewsAPI, GNews and CricketAPI.</li>
+            <li>Added a multi-engine OCR fallback (EasyOCR, Tesseract, PaddleOCR) and URL text extraction with trafilatura.</li>
+            <li>Built a fact-checking layer that computes a confidence score from source credibility and evidence overlap.</li>
+          </ul>
+          <h4 class="flow-title">Working flow <span>· from claim to verdict</span></h4>
+          <ol class="flow" style="--n:6">
+            <li><b>User input</b>A text claim, a screenshot or a news URL.</li>
+            <li><b>Text extraction</b>Images go through OCR (EasyOCR, Tesseract, PaddleOCR fallback); URLs through trafilatura.</li>
+            <li><b>Gemini stage 1</b>Understands the claim and what needs checking.</li>
+            <li><b>Live evidence</b>Fetched from NewsAPI, GNews and CricketAPI.</li>
+            <li><b>Gemini stage 2</b>Weighs the evidence and gives a verdict.</li>
+            <li class="out"><b>Confidence score</b>Built from source credibility and evidence overlap.</li>
+          </ol>
+          <ul class="chips"><li>Python</li><li>FastAPI</li><li>Google Gemini AI</li><li>NewsAPI</li><li>GNews</li><li>CricketAPI</li><li>OCR</li><li>HTML/CSS/JS</li></ul>
+        </article>
+
+        <article class="project">
+          <h3>College Placement Portal</h3>
+          <p class="tag">Full-stack campus recruitment system</p>
+          <ul>
+            <li>Built a placement platform with JWT authentication and role-based access for Students, Companies and Admins.</li>
+            <li>Designed 34 REST APIs across a layered Spring Boot architecture (Controller → Service → Repository → Entity).</li>
+            <li>Built a server-side eligibility engine that checks CGPA, branch and backlog criteria before an application is allowed.</li>
+          </ul>
+          <h4 class="flow-title">Working flow <span>· every API request</span></h4>
+          <ol class="flow" style="--n:6">
+            <li><b>Login</b>Student, Company or Admin signs in.</li>
+            <li><b>JWT token</b>Spring Security issues a token and checks it on each request.</li>
+            <li><b>Role check</b>Access is limited by role.</li>
+            <li><b>Controller</b>Receives the request from one of the 34 REST APIs.</li>
+            <li><b>Service</b>Applies the business rules.</li>
+            <li class="out"><b>Repository → MySQL</b>Reads and writes the Entity data.</li>
+          </ol>
+          <h4 class="flow-title">Application flow <span>· when a student applies</span></h4>
+          <ol class="flow" style="--n:3">
+            <li><b>Student applies</b>Submits an application through the API.</li>
+            <li><b>Eligibility engine</b>The server checks CGPA, branch and backlog criteria.</li>
+            <li class="out"><b>Decision</b>Eligible: the application goes through. Not eligible: it is blocked before saving.</li>
+          </ol>
+          <ul class="chips"><li>Java</li><li>Spring Boot</li><li>Spring Security</li><li>JWT</li><li>MySQL</li><li>JavaScript</li></ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="journey">
+    <div class="wrap">
+      <h2>Experience &amp; education</h2>
+      <div class="timeline">
+        <div>
+          <h3 class="col">Internship</h3>
+          <div class="step">
+            <b>Full Stack Development Intern</b>
+            <span>Odugaa Tech Pvt. Ltd.</span>
+            <ul>
+              <li>Built RESTful APIs and implemented frontend and backend features, using MySQL for data management.</li>
+              <li>Practised Git-based version control and web application deployment in a live team environment.</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <h3 class="col">Education</h3>
+          <div class="step">
+            <b>B.E. Computer Science Engineering</b>
+            <span>Government College of Engineering, Salem · Expected May 2027 · CGPA 7.65 / 10</span>
+          </div>
+          <div class="step">
+            <b>Government College of Engineering, Tirunelveli</b>
+            <span>08/2023 – 10/2024 · CGPA 7.90 / 10 (transferred to Salem)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="achievements">
+    <div class="wrap">
+      <h2>Certifications &amp; activities</h2>
+      <ul class="ach">
+        <li>Generative AI Certification – HCL GUVI</li>
+        <li>Smart India Hackathon (SIH) – Participant, 2025</li>
+        <li>Active member of Rotaract Club, GECO Tech Club and Sports Club</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p>I'm open to software engineering roles and internships. Send me an email or message me on LinkedIn.</p>
+      <div class="links">
+        <a href="mailto:ragulkathir.dev@gmail.com">Email<small>ragulkathir.dev@gmail.com</small></a>
+        <a href="tel:+918637632230">Phone<small>+91 8637632230</small></a>
+        <a href="https://linkedin.com/in/ragul-k-0157b2376" target="_blank" rel="noopener">LinkedIn<small>linkedin.com/in/ragul-k-0157b2376</small></a>
+        <a href="https://github.com/raguldev-hub" target="_blank" rel="noopener">GitHub<small>github.com/raguldev-hub</small></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Ragul K · Salem, India</div>
+</footer>
+
+</body>
+</html>
